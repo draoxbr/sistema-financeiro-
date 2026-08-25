@@ -1,6 +1,6 @@
 import { Cliente, ResultadoAnalise } from "@/types";
 
-const API_URL = 'http://localhost:3001';
+const API_URL = 'https://sistema-emprestimo-m965.onrender.com';
 
 export const api = {
     async getClient(): Promise<Cliente[]> {
