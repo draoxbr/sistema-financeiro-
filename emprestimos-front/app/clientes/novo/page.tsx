@@ -14,6 +14,7 @@ export default function NovoClientePage() {
       alert('Cliente cadastrado com sucesso!');
       router.push('/clientes');
     } catch (error) {
+      console.log(error)
       alert('Erro ao cadastrar cliente. Tente novamente.');
     }
   };

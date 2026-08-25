@@ -25,7 +25,7 @@ const criarCliente = async (dados) => {
   const [resultado] = await db.query(
     'INSERT INTO clientes (nome, cpf, idade, renda, estado) VALUES (?, ?, ?, ?, ?)',
     [nome, cpf, idade, renda, estado]
-  );
+  ); console.log(nome)
   return { id: resultado.insertId, ...dados };
 };
 
