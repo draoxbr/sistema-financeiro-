@@ -3,12 +3,12 @@ require('dotenv').config();
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT), // O Aiven usa portas dinâmicas (ex: 28532)
+  port: Number(process.env.DB_PORT), 
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   ssl: {
-    rejectUnauthorized: false // Permite conexões SSL/TLS do Aiven
+    rejectUnauthorized: false
   },
   waitForConnections: true,
   connectionLimit: 10,
