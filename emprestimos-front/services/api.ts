@@ -1,6 +1,6 @@
 import { Cliente, ResultadoAnalise } from "@/types";
 
-const API_URL = 'API_URL = https://sistema-emprestimo-m965.onrender.com';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://sistema-emprestimo-m965.onrender.com';
 
 const getHeaders = () => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
@@ -85,10 +85,10 @@ export const api = {
   },
 
   cadastrar: async (nome: string, email: string, senha: string) => {
-    const res = await fetch(`${API_URL}/auth/register`,{
+    const res = await fetch(`${API_URL}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome, email, senha}),
+      body: JSON.stringify({ nome, email, senha }),
     });
 
     const data = await res.json();
