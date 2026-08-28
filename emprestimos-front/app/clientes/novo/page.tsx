@@ -14,16 +14,20 @@ export default function NovoClientePage() {
       alert('Cliente cadastrado com sucesso!');
       router.push('/clientes');
     } catch (error) {
-      console.log(error)
+      console.log(error);
       alert('Erro ao cadastrar cliente. Tente novamente.');
     }
   };
 
   return (
-    <div>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header />
-      <main className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <h1 style={{ marginBottom: '2rem', alignSelf: 'flex-start' }}>Cadastrar Novo Cliente</h1>
+      
+      <main className="container" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ width: '100%', maxWidth: '520px', marginBottom: '1.5rem' }}>
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold' }}>Cadastrar Novo Cliente</h1>
+        </div>
+
         <ClienteForm onSubmit={handleSave} />
       </main>
     </div>

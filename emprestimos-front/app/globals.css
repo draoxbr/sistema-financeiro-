@@ -17,18 +17,23 @@
   padding: 0;
 }
 
-body {
+html, body {
+  min-height: 100vh;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: var(--bg-main);
   color: var(--text-primary);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  min-height: 100vh;
 }
 
-/* Container padrão */
+/* Container principal centralizado */
 .container {
   max-width: 1100px;
+  width: 100%;
   margin: 2rem auto;
   padding: 0 1.5rem;
+  box-sizing: border-box;
 }
 
 /* Formulários */
@@ -37,15 +42,18 @@ body {
   padding: 2rem;
   border-radius: 12px;
   border: 1px solid var(--border);
-  max-width: 480px;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.25rem;
 }
 
 .form-group label {
@@ -53,7 +61,7 @@ body {
   color: var(--text-secondary);
 }
 
-input {
+input, select {
   background: var(--bg-main);
   border: 1px solid var(--border);
   color: var(--text-primary);
@@ -61,10 +69,12 @@ input {
   border-radius: 8px;
   font-size: 1rem;
   outline: none;
+  width: 100%;
+  box-sizing: border-box;
   transition: border-color 0.2s;
 }
 
-input:focus {
+input:focus, select:focus {
   border-color: var(--accent);
 }
 
@@ -101,14 +111,16 @@ input:focus {
   background: var(--bg-card);
   border-radius: 12px;
   border: 1px solid var(--border);
-  overflow: hidden;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+  overflow-x: auto;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  width: 100%;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
+  min-width: 600px;
 }
 
 th {
@@ -131,4 +143,26 @@ tr:last-child td {
 
 tr:hover td {
   background: rgba(255, 255, 255, 0.02);
+}
+
+/* Ajustes exclusivos para Celular (Mobile) */
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1rem;
+    margin: 1rem auto 3rem auto;
+  }
+
+  .form-card {
+    padding: 1.25rem;
+  }
+
+  .form-group {
+    gap: 0.3rem;
+    margin-bottom: 0.85rem;
+  }
+
+  input, select {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.95rem;
+  }
 }

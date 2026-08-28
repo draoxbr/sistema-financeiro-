@@ -67,12 +67,24 @@ export default function AnalisePage() {
   };
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header />
-      <main className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <h1 style={{ marginBottom: '2rem', alignSelf: 'flex-start' }}>Análise de Crédito</h1>
+      
+      <main 
+        className="container" 
+        style={{ 
+          flex: 1, 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center',
+          paddingBottom: '3.5rem' // Garante que a rolagem chegue até o fim no mobile
+        }}
+      >
+        <div style={{ width: '100%', maxWidth: '520px', marginBottom: '1.5rem' }}>
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold' }}>Análise de Crédito</h1>
+        </div>
 
-        <div className="form-card" style={{ width: '100%' }}>
+        <div className="form-card" style={{ width: '100%', maxWidth: '520px' }}>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Selecionar Cliente Cadastrado</label>
@@ -125,11 +137,18 @@ export default function AnalisePage() {
         </div>
 
         {resultado && (
-          <div style={{ marginTop: '2.5rem', width: '100%' }}>
-            <h2 style={{ marginBottom: '1.2rem', color: '#fff' }}>
+          <div style={{ marginTop: '2.5rem', width: '100%', maxWidth: '520px' }}>
+            <h2 style={{ marginBottom: '1.2rem', color: '#fff', fontSize: '1.3rem' }}>
               Empréstimos Elegíveis para <span style={{ color: 'var(--accent)' }}>{resultado.cliente}</span>
             </h2>
-            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+            
+            {/* Grid flexível de cards */}
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', 
+              gap: '1rem',
+              width: '100%' 
+            }}>
               {resultado.emprestimos?.map((loan, idx) => (
                 <LoanCard key={idx} emprestimo={loan} />
               ))}
@@ -137,6 +156,6 @@ export default function AnalisePage() {
           </div>
         )}
       </main>
-    </>
+    </div>
   );
 }

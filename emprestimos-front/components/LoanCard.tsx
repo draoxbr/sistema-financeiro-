@@ -6,8 +6,9 @@ export default function LoanCard({ emprestimo }: { emprestimo: Emprestimo }) {
       background: 'var(--bg-card)',
       border: '1px solid var(--border)',
       borderRadius: '12px',
-      padding: '1.5rem',
-      minWidth: '220px',
+      padding: '1.25rem',
+      width: '100%',
+      boxSizing: 'border-box',
       boxShadow: '0 4px 6px -1px rgba(0,0,0,0.2)'
     }}>
       <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--accent)' }}>{emprestimo.tipo}</h3>
