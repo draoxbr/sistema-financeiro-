@@ -1,9 +1,19 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
-import { api } from '@/services/api';
+import { ClienteApiRepository } from '@/repositories/ClienteApiRepository';
+import { ClienteService } from '@/services/ClienteService';
+import { EmprestimoApiRepository } from '@/repositories/EmprestimoApiRepository';
+import { EmprestimoService } from '@/services/EmprestimoService';
 import { ResultadoAnalise, Cliente } from '@/types';
 import LoanCard from '@/components/LoanCard';
+
+// Injeção de Dependências
+const clienteRepo = new ClienteApiRepository();
+const clienteService = new ClienteService(clienteRepo);
+
+const emprestimoRepo = new EmprestimoApiRepository();
+const emprestimoService = new EmprestimoService(emprestimoRepo);
 
 export default function AnalisePage() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
@@ -22,7 +32,7 @@ export default function AnalisePage() {
   useEffect(() => {
     async function carregarClientes() {
       try {
-        const listaClientes = await api.getClient();
+        const listaClientes = await clienteService.listarClientes();
         setClientes(listaClientes);
       } catch (err) {
         console.error('Erro ao carregar clientes:', err);
@@ -56,11 +66,11 @@ export default function AnalisePage() {
 
     setLoading(true);
     try {
-      const data = await api.analisarEmprestimo(form);
+      const data = await emprestimoService.analisarEmprestimo(form);
       setResultado(data);
       alert('Análise de crédito realizada com sucesso!');
-    } catch (err) {
-      alert('Erro ao realizar análise de crédito.');
+    } catch (err: any) {
+      alert(err.message || 'Erro ao realizar análise de crédito.');
     } finally {
       setLoading(false);
     }
@@ -77,7 +87,7 @@ export default function AnalisePage() {
           display: 'flex', 
           flexDirection: 'column', 
           alignItems: 'center',
-          paddingBottom: '3.5rem' // Garante que a rolagem chegue até o fim no mobile
+          paddingBottom: '3.5rem'
         }}
       >
         <div style={{ width: '100%', maxWidth: '520px', marginBottom: '1.5rem' }}>
@@ -142,7 +152,6 @@ export default function AnalisePage() {
               Empréstimos Elegíveis para <span style={{ color: 'var(--accent)' }}>{resultado.cliente}</span>
             </h2>
             
-            {/* Grid flexível de cards */}
             <div style={{ 
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', 

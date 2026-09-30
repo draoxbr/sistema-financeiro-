@@ -2,8 +2,12 @@
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import ClienteTable from '@/components/ClienteTable';
-import { api } from '@/services/api';
+import { ClienteApiRepository } from '@/repositories/ClienteApiRepository';
+import { ClienteService } from '@/services/ClienteService';
 import { Cliente } from '@/types';
+
+const clienteRepository = new ClienteApiRepository();
+const clienteService = new ClienteService(clienteRepository);
 
 export default function ClientesPage() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
@@ -12,7 +16,7 @@ export default function ClientesPage() {
   const carregarClientes = async () => {
     try {
       setLoading(true);
-      const data = await api.getClient();
+      const data = await clienteService.listarClientes();
       setClientes(data);
     } catch (error) {
       console.error('Erro ao carregar clientes:', error);
@@ -28,10 +32,10 @@ export default function ClientesPage() {
   const handleDelete = async (id: number) => {
     if (confirm('Tem certeza que deseja excluir este cliente?')) {
       try {
-        await api.excluirCliente(id);
+        await clienteService.removerCliente(id);
         setClientes((prev) => prev.filter((c) => c.id !== id));
-      } catch (error) {
-        alert('Erro ao excluir cliente.');
+      } catch (error: any) {
+        alert(error.message || 'Erro ao excluir cliente.');
       }
     }
   };

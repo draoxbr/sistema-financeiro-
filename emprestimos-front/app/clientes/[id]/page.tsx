@@ -1,10 +1,15 @@
 'use client';
 import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
-import { api } from '@/services/api';
+import { ClienteApiRepository } from '@/repositories/ClienteApiRepository';
+import { ClienteService } from '@/services/ClienteService';
 import { Cliente } from '@/types';
 import Header from '@/components/Header';
 import ClienteForm from '@/components/ClienteForm';
+
+// Instanciação e Injeção de Dependência
+const clienteRepository = new ClienteApiRepository();
+const clienteService = new ClienteService(clienteRepository);
 
 export default function EditarClientePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -12,16 +17,25 @@ export default function EditarClientePage({ params }: { params: Promise<{ id: st
   const [cliente, setCliente] = useState<Cliente | null>(null);
 
   useEffect(() => {
-    api.getClientePorId(id).then(setCliente);
+    const carregarCliente = async () => {
+      try {
+        const clienteEncontrado = await clienteService.obterClientePorId(Number(id));
+        setCliente(clienteEncontrado);
+      } catch (error) {
+        console.error('Erro ao buscar cliente:', error);
+      }
+    };
+
+    carregarCliente();
   }, [id]);
 
   const handleSave = async (data: Cliente) => {
     try {
-      await api.atualizarCliente(id, data);
+      await clienteService.atualizarCliente(Number(id), data);
       alert('Cliente atualizado com sucesso!');
       router.push('/clientes');
-    } catch (error) {
-      alert('Erro ao salvar cliente. Tente novamente.');
+    } catch (error: any) {
+      alert(error.message || 'Erro ao salvar cliente. Tente novamente.');
     }
   };
 

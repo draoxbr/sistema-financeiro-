@@ -1,21 +1,26 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { api } from '@/services/api';
+import { ClienteApiRepository } from '@/repositories/ClienteApiRepository';
+import { ClienteService } from '@/services/ClienteService';
 import { Cliente } from '@/types';
 import Header from '@/components/Header';
 import ClienteForm from '@/components/ClienteForm';
+
+const clienteRepository = new ClienteApiRepository();
+const clienteService = new ClienteService(clienteRepository);
 
 export default function NovoClientePage() {
   const router = useRouter();
 
   const handleSave = async (data: Cliente) => {
     try {
-      await api.criarCliente(data);
+     
+      await clienteService.criarCliente(data);
       alert('Cliente cadastrado com sucesso!');
       router.push('/clientes');
-    } catch (error) {
-      console.log(error);
-      alert('Erro ao cadastrar cliente. Tente novamente.');
+    } catch (error: any) {
+      console.error(error);
+      alert(error.message || 'Erro ao cadastrar cliente. Tente novamente.');
     }
   };
 

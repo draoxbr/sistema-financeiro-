@@ -26,7 +26,6 @@ export default function ClienteTable({ clientes = [], onDelete }: Props) {
     );
   }
 
-  // RENDERIZAÇÃO MOBILE: CARDS (com respiro no final da página)
   if (isMobile) {
     return (
       <div style={{ width: '100%', paddingBottom: '3rem' }}>
@@ -78,7 +77,6 @@ export default function ClienteTable({ clientes = [], onDelete }: Props) {
     );
   }
 
-  // RENDERIZAÇÃO DESKTOP: TABELA
   return (
     <div
       style={{
