@@ -41,7 +41,7 @@ export default function ClientesPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#130d1d' }}>
       <Header />
 
       <main 
@@ -51,16 +51,16 @@ export default function ClientesPage() {
           width: '100%', 
           maxWidth: '1100px', 
           margin: '0 auto', 
-          padding: '1.5rem 1rem 4rem 1rem', 
+          padding: '2rem 1rem 4rem 1rem', 
           boxSizing: 'border-box' 
         }}
       >
-        <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
+        <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#e9d5ff' }}>
           Lista de Clientes
         </h1>
 
         {loading ? (
-          <p style={{ color: 'var(--text-secondary)' }}>Carregando clientes...</p>
+          <p style={{ color: '#c084fc', textAlign: 'center', padding: '2rem 0' }}>Carregando clientes...</p>
         ) : (
           <div style={{ width: '100%' }}>
             <ClienteTable clientes={clientes} onDelete={handleDelete} />

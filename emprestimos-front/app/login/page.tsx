@@ -38,7 +38,7 @@ export default function LoginPage() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#0b1329',
+      backgroundColor: '#130d1d', // Fundo bem escuro levemente roxo
       padding: '1.5rem',
       fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
     }}>
@@ -47,16 +47,16 @@ export default function LoginPage() {
         maxWidth: '420px',
         padding: '2.5rem 2rem',
         borderRadius: '12px',
-        backgroundColor: '#162238',
-        border: '1px solid #233554',
-        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.35)',
+        backgroundColor: '#261b36',
+        border: '1px solid #4c2d6b',
+        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
         color: '#ffffff'
       }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 700, margin: '0 0 0.5rem 0', color: '#ffffff' }}>
-            💰 Sistema Financeiro
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 700, margin: '0 0 0.5rem 0', color: '#e9d5ff' }}>
+            💰 Sistema Financeiro 💰
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.925rem', margin: 0 }}>
+          <p style={{ color: '#c084fc', fontSize: '0.925rem', margin: 0 }}>
             Insira suas credenciais para acessar o painel
           </p>
         </div>
@@ -78,7 +78,7 @@ export default function LoginPage() {
 
         <form onSubmit={handleLogin}>
           <div style={{ marginBottom: '1.25rem' }}>
-            <label htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 600, color: '#cbd5e1' }}>
+            <label htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 600, color: '#e9d5ff' }}>
               E-mail
             </label>
             <input
@@ -88,22 +88,12 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              style={{
-                width: '100%',
-                padding: '0.75rem 1rem',
-                borderRadius: '6px',
-                border: '1px solid #2d4263',
-                backgroundColor: '#0b1329',
-                color: '#ffffff',
-                fontSize: '0.95rem',
-                outline: 'none',
-                boxSizing: 'border-box'
-              }}
+              className="input-field"
             />
           </div>
 
           <div style={{ marginBottom: '1.75rem' }}>
-            <label htmlFor="senha" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 600, color: '#cbd5e1' }}>
+            <label htmlFor="senha" style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 600, color: '#e9d5ff' }}>
               Senha
             </label>
             <input
@@ -113,49 +103,69 @@ export default function LoginPage() {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               required
-              style={{
-                width: '100%',
-                padding: '0.75rem 1rem',
-                borderRadius: '6px',
-                border: '1px solid #2d4263',
-                backgroundColor: '#0b1329',
-                color: '#ffffff',
-                fontSize: '0.95rem',
-                outline: 'none',
-                boxSizing: 'border-box'
-              }}
+              className="input-field"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            style={{
-              width: '100%',
-              padding: '0.85rem',
-              borderRadius: '6px',
-              border: 'none',
-              backgroundColor: '#2563eb',
-              color: '#ffffff',
-              fontWeight: 600,
-              fontSize: '1rem',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              opacity: loading ? 0.7 : 1,
-              transition: 'background-color 0.2s ease'
-            }}
+            className="btn-entrar"
           >
             {loading ? 'Autenticando...' : 'Entrar no Sistema'}
           </button>
         </form>
 
-        <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.875rem', color: '#94a3b8' }}>
+        <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.875rem', color: '#d8b4fe' }}>
           Não tem uma conta?{' '}
-          <Link href="/cadastro" style={{ color: '#38bdf8', textDecoration: 'none', fontWeight: 600 }}>
+          <Link href="/cadastro" style={{ color: '#c084fc', textDecoration: 'none', fontWeight: 600 }}>
             Cadastre-se
           </Link>
         </div>
       </div>
+
+      <style jsx>{`
+        .input-field {
+          width: 100%;
+          padding: 0.75rem 1rem;
+          border-radius: 6px;
+          border: 1px solid #4c2d6b;
+          background-color: #1b1326;
+          color: #ffffff;
+          font-size: 0.95rem;
+          outline: none;
+          box-sizing: border-box;
+          transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .input-field::placeholder {
+          color: #8b5cf6;
+          opacity: 0.6;
+        }
+        .input-field:focus {
+          border-color: #a855f7;
+          box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.25);
+        }
+
+        .btn-entrar {
+          width: 100%;
+          padding: 0.85rem;
+          border-radius: 6px;
+          border: none;
+          background-color: #a855f7;
+          color: #ffffff;
+          font-weight: 600;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background-color 0.2s ease, opacity 0.2s ease;
+        }
+        .btn-entrar:hover:not(:disabled) {
+          background-color: #9333ea;
+        }
+        .btn-entrar:disabled {
+          cursor: not-allowed;
+          opacity: 0.7;
+        }
+      `}</style>
     </main>
   );
-  //
 }

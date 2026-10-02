@@ -16,8 +16,8 @@ export default function Header() {
 
   return (
     <header style={{
-      backgroundColor: '#162238',
-      borderBottom: '1px solid #233554',
+      backgroundColor: '#1b1326', // Lilás escuro profundo
+      borderBottom: '1px solid #332147', // Borda lilás sutil
       padding: '0.875rem 1.5rem',
       position: 'relative',
       color: '#ffffff'
@@ -29,22 +29,22 @@ export default function Header() {
         width: '100%'
       }}>
         {/* Logo na Esquerda */}
-        <Link href="/" style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#ffffff', textDecoration: 'none' }}>
+        <Link href="/" style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#e9d5ff', textDecoration: 'none' }}>
           💰 SistemaFinanceiro
         </Link>
 
-        {/* Lado Direito (Desktop): Links da Navegação + Botão Sair no final da tela */}
+        {/* Lado Direito (Desktop): Links da Navegação + Botão Sair */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           
           {/* Navegação Desktop */}
           <nav className="desktop-nav" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-            <Link href="/clientes" style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.9rem' }}>
+            <Link href="/clientes" className="nav-link">
               Clientes
             </Link>
-            <Link href="/clientes/novo" style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.9rem' }}>
+            <Link href="/clientes/novo" className="nav-link">
               Novo Cliente
             </Link>
-            <Link href="/analise" style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '0.9rem' }}>
+            <Link href="/analise" className="nav-link">
               Análise de Crédito
             </Link>
           </nav>
@@ -52,16 +52,7 @@ export default function Header() {
           {/* Botão Sair */}
           <button
             onClick={handleLogout}
-            style={{
-              backgroundColor: 'transparent',
-              border: '1px solid #ef4444',
-              color: '#fca5a5',
-              padding: '0.35rem 0.75rem',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '0.85rem',
-              fontWeight: 600
-            }}
+            className="btn-sair"
           >
             Sair
           </button>
@@ -70,15 +61,6 @@ export default function Header() {
           <button
             onClick={() => setMenuAberto(!menuAberto)}
             className="mobile-menu-btn"
-            style={{
-              backgroundColor: 'transparent',
-              border: 'none',
-              color: '#ffffff',
-              fontSize: '1.5rem',
-              cursor: 'pointer',
-              padding: '0 0.25rem',
-              lineHeight: 1
-            }}
             aria-label="Abrir Menu"
           >
             ⋮
@@ -89,8 +71,8 @@ export default function Header() {
       {/* Menu Dropdown Mobile */}
       {menuAberto && (
         <nav style={{
-          backgroundColor: '#1e293b',
-          border: '1px solid #334155',
+          backgroundColor: '#261b36',
+          border: '1px solid #4c2d6b',
           borderRadius: '8px',
           marginTop: '0.75rem',
           padding: '0.5rem',
@@ -101,21 +83,21 @@ export default function Header() {
           <Link 
             href="/clientes" 
             onClick={() => setMenuAberto(false)}
-            style={{ color: '#f8fafc', textDecoration: 'none', padding: '0.5rem', borderRadius: '4px' }}
+            className="mobile-nav-link"
           >
             Clientes
           </Link>
           <Link 
             href="/clientes/novo" 
             onClick={() => setMenuAberto(false)}
-            style={{ color: '#f8fafc', textDecoration: 'none', padding: '0.5rem', borderRadius: '4px' }}
+            className="mobile-nav-link"
           >
             Novo Cliente
           </Link>
           <Link 
             href="/analise" 
             onClick={() => setMenuAberto(false)}
-            style={{ color: '#f8fafc', textDecoration: 'none', padding: '0.5rem', borderRadius: '4px' }}
+            className="mobile-nav-link"
           >
             Análise de Crédito
           </Link>
@@ -123,6 +105,53 @@ export default function Header() {
       )}
 
       <style jsx>{`
+        .nav-link {
+          color: #d8b4fe;
+          text-decoration: none;
+          font-size: 0.9rem;
+          transition: color 0.2s ease;
+        }
+        .nav-link:hover {
+          color: #ffffff;
+        }
+
+        .mobile-nav-link {
+          color: #f3e8ff;
+          text-decoration: none;
+          padding: 0.5rem;
+          border-radius: 4px;
+          transition: background-color 0.2s ease;
+        }
+        .mobile-nav-link:hover {
+          background-color: #3b2852;
+        }
+
+        .btn-sair {
+          background-color: transparent;
+          border: 1px solid #a855f7;
+          color: #e9d5ff;
+          padding: 0.35rem 0.75rem;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 0.85rem;
+          font-weight: 600;
+          transition: all 0.2s ease;
+        }
+        .btn-sair:hover {
+          background-color: #a855f7;
+          color: #ffffff;
+        }
+
+        .mobile-menu-btn {
+          background-color: transparent;
+          border: none;
+          color: #e9d5ff;
+          font-size: 1.5rem;
+          cursor: pointer;
+          padding: 0 0.25rem;
+          line-height: 1;
+        }
+
         @media (min-width: 768px) {
           .mobile-menu-btn {
             display: none !important;
